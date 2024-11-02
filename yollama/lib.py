@@ -6,7 +6,7 @@ default_llm_model_name = "llama3.1"
 default_long_context_llm_model_name = "mistral-nemo"
 default_sql_llm_model_name = "qwen2.5-coder"
 
-def get_llm(use_case: Literal["default", "long-context", "sql"] = "default", output_json: bool = True):
+def get_llm(use_case: Literal["default", "long-context", "sql"] = "default", output_json: bool = True, check_model_exists: bool = False):
     if use_case not in ["default", "long-context", "sql"]:
         raise ValueError("Invalid use case. Please choose from 'default', 'long-context', or 'sql'.")
 
@@ -23,7 +23,7 @@ def get_llm(use_case: Literal["default", "long-context", "sql"] = "default", out
         num_ctx = 8192
 
     stdout, stderr = run_bash_command("ollama list")
-    if stderr or model_name not in stdout:
+    if check_model_exists and model_name not in stdout:
         raise ValueError(f"Model {model_name} not found. Please install it with `ollama pull {model_name}`.")
 
     if output_json:
