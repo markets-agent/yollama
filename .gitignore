@@ -1,0 +1,9 @@
+.env
+__pycache__
+venv
+scratchpad.py
+scratchpad.sql
+example.pdf
+yollama.egg-info
+build
+dist
