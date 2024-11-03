@@ -17,6 +17,8 @@ default_long_context_llm_model_name = "mistral-nemo"
 default_sql_llm_model_name = "qwen2.5-coder"
 ```
 
+The `num_ctx` parameter is the size of the context window used to generate the next token, here we use values for a 20GB VRAM GPU.
+
 - Python 3 with `venv` and `pip` installed
 
 ## basic usage
@@ -25,7 +27,7 @@ default_sql_llm_model_name = "qwen2.5-coder"
 
 ### `get_llm()`
 
-1st parameter is the use case, which determines the model and context size.
+1st parameter is the use case (`Literal["default", "long-context", "sql"]`), which determines the model and context size.
 
 2nd parameter is a boolean to determine if the LLM should return a JSON object or a string.
 

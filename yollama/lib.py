@@ -11,6 +11,8 @@ def get_llm(use_case: Literal["default", "long-context", "sql"] = "default", out
         raise ValueError("Invalid use case. Please choose from 'default', 'long-context', or 'sql'.")
 
     model_name = None
+    # `num_ctx` is the size of the context window used to generate the next token,
+    # here we use values for a 20GB VRAM GPU
     num_ctx = None
     if use_case == "long-context":
         model_name = default_long_context_llm_model_name
@@ -30,7 +32,6 @@ def get_llm(use_case: Literal["default", "long-context", "sql"] = "default", out
         return ChatOllama(
             format="json",
             model=model_name,
-            # `num_ctx` is the size of the context window used to generate the next token
             num_ctx=num_ctx,
             # `num_predict` sets the maximum number of tokens to generate in the response,
             # -1 means infinite generation, -2 means fill context
